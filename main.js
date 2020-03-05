@@ -24,6 +24,13 @@ function isValid(email) {
   return re.test(String(email).toLowerCase());
 }
 
+// Check required fields
+function checkRequired(inputArr) {
+  inputArr.forEach(function(input) {
+    console.log(input);
+  });
+}
+
 // Event listeners
 form.addEventListener("submit", function(e) {
   e.preventDefault();
