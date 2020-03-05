@@ -29,6 +29,17 @@ function getFieldName(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
+// Check Input Length
+function checkLength(input, min, max) {
+  if (input.value.length < min) {
+    showError(input, `${getFieldName(input)} must be at least ${min}`);
+  } else if (input.value.length > max) {
+    showError(input, `${getFieldName(input)} must be at less than ${max}`);
+  } else {
+    showSuccess(input);
+  }
+}
+
 // Check required fields
 function checkRequired(inputArr) {
   inputArr.forEach(function(input) {
@@ -45,6 +56,8 @@ form.addEventListener("submit", function(e) {
   e.preventDefault();
 
   checkRequired([username, email, password, password2]);
+  checkLength(username, 3, 15);
+  checkLength(password, 6, 20);
   // if (username.value === "") {
   //   showError(username, "Username is required");
   // } else {
