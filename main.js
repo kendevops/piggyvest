@@ -15,7 +15,13 @@ function showError(input, message) {
 // Show success outline
 function showSuccess(input) {
   const formControl = input.parentElement;
-  formControl.className = "form-control sucess";
+  formControl.className = "form-control success";
+}
+
+// Check email is valid
+function isValid(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }
 
 // Event listeners
@@ -25,5 +31,25 @@ form.addEventListener("submit", function(e) {
     showError(username, "Username is required");
   } else {
     showSuccess(username);
+  }
+
+  if (email.value === "") {
+    showError(email, "Email is required");
+  } else if (!isValidEmail(email.value)) {
+    showError(email, "Email is not valid");
+  } else {
+    showSuccess(email);
+  }
+
+  if (password.value === "") {
+    showError(password, "Password is required");
+  } else {
+    showSuccess(password);
+  }
+
+  if (username.value === "") {
+    showError(password2, "Confirm Password is required");
+  } else {
+    showSuccess(password2);
   }
 });
