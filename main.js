@@ -19,9 +19,23 @@ function showSuccess(input) {
 }
 
 // Check email is valid
-function isValid(email) {
+function checkEmail(input) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
+  if (re.test(input.value.trim())) {
+    showSuccess(input);
+  } else {
+    showError(input, "Email is not valid");
+  }
+}
+
+// Check passwords match
+
+function checkPasswordsMatch(input1, input2) {
+  if (input1.value !== input2.value) {
+    showError(input2, "Passwords do not match");
+  } else {
+    showSuccess(input);
+  }
 }
 
 // To make the first letter in the error message capital
@@ -58,6 +72,8 @@ form.addEventListener("submit", function(e) {
   checkRequired([username, email, password, password2]);
   checkLength(username, 3, 15);
   checkLength(password, 6, 20);
+  checkEmail(email);
+  checkPasswordsMatch(password, password2);
   // if (username.value === "") {
   //   showError(username, "Username is required");
   // } else {
